@@ -28,4 +28,4 @@ jobs:
           type: ${{ job.status }}
           job_name: "test"
           channel: "##github_action"
-          url: "https://hooks.slack.com/services/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"
+          url: "https://hooks.slack.com/services/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"
