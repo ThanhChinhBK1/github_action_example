@@ -1,31 +1,12 @@
-name: test worlflows
-
-on:
-  push:
-    branches:
-      - master
-    tags:
-      -v*
-
+on: push
+name: Slack Notification Demo
 jobs:
-  test:
-    name: test
+  slackNotification:
+    name: Slack Notification
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
-      - name: Test with pytest
-        run: |
-          pip install pytest
-          pytest -v
-      - uses: homoluctus/slatify@master
-        if: failure()
-        with:
-          type: ${{ job.status }}
-          job_name: "test"
-          channel: "##github_action"
-          url: "https://hooks.slack.com/services/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"
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
