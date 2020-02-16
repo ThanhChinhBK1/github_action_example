@@ -1,0 +1,6 @@
+import pytest
+
+
+class xyz():
+    def test_xyz(self):
+        assert 1==0
