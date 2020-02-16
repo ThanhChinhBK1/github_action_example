@@ -1,0 +1,31 @@
+name: test worlflows
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      -v*
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Test with pytest
+        run: |
+          pip install pytest
+          pytest -v
+      - uses: homoluctus/slatify@master
+        if: failure()
+        with:
+          type: ${{ job.status }}
+          job_name: "test"
+          channel: "##github_action"
+          url: "https://hooks.slack.com/services/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"
